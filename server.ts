@@ -25,7 +25,13 @@ const server = Bun.serve({
     if (url.pathname === '/blog') {
       return new Response('Blog page', { status: 200 })
     }
+    if (url.pathname === '/error-page') {
+      throw new Error('This is an error page')
+    }
     return new Response('Not Found', { status: 404 })
+  },
+  error(e: Error): Response {
+    return new Response(`${e.message}\n${e.stack}`, { status: 500 })
   },
 })
 console.log(`Server is running on port ${server.port}!`)
