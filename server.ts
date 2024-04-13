@@ -25,6 +25,9 @@ const server = Bun.serve({
     if (url.pathname === '/blog') {
       return new Response('Blog page', { status: 200 })
     }
+    if (url.pathname === '/txt') {
+      return new Response(Bun.file('./read.txt'), { status: 200 })
+    }
     if (url.pathname === '/error-page') {
       throw new Error('This is an error page')
     }
